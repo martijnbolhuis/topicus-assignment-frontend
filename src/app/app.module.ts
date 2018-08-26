@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RecipeFormComponent } from './recipe-form/recipe-form.component';
+import { RecipeService} from './recipe.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,13 @@ import { RecipeFormComponent } from './recipe-form/recipe-form.component';
     RecipeFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    RecipeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

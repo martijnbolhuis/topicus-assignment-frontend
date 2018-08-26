@@ -1,16 +1,18 @@
 <h1>Hallo</h1>
-<form>
+<form [formGroup]="recipeForm">
   BSN Number:<br>
-  <input type="text" name="bsn_number"><br>
+  <input formControlName="bsnNumber" type="text" name="bsn_number"><br>
 
   Prescription date:<br>
-  <input type="date" name="prescription_date"><br>
+  <input formControlName="prescriptionDate" type="date" name="prescription_date"><br>
 
   End date:<br>
-  <input type="date" name="end_date"><br>
+  <input formControlName="endDate" type="date" name="end_date"><br>
 
   Delivery method:
-  <select>
+  <select formControlName="deliveryMethod">
     <option *ngFor="let deliveryMethod of deliveryMethods" [value]="deliveryMethod">{{deliveryMethod}}</option>
   </select>
+
+  <button (click)="saveRecipe()">Save</button>
 </form>
