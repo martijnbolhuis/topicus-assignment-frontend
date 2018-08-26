@@ -1,0 +1,16 @@
+<h1>Hallo</h1>
+<form>
+  BSN Number:<br>
+  <input type="text" name="bsn_number"><br>
+
+  Prescription date:<br>
+  <input type="date" name="prescription_date"><br>
+
+  End date:<br>
+  <input type="date" name="end_date"><br>
+
+  Delivery method:
+  <select>
+    <option *ngFor="let deliveryMethod of deliveryMethods" [value]="deliveryMethod">{{deliveryMethod}}</option>
+  </select>
+</form>
