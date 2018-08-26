@@ -33,8 +33,9 @@ export class RecipeFormComponent implements OnInit {
       end_date: this.recipeForm.get('endDate').value,
       delivery_method: this.recipeForm.get('deliveryMethod').value
     }
-
+    console.log(recipe);
     this.recipeService.saveRecipe(recipe).subscribe(response => {
+      console.log("Got a response!");
       console.log(response);
     });
   }

@@ -1,6 +1,12 @@
 {
-  "/recipes": {
-    "target": "http://localhost:8080/recipes",
-    "secure": false
-  }
+   "/recipes": {
+      "target":  {
+        "host": "localhost",
+        "protocol": "http:",
+        "port": 8080
+      },
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "info"
+   }
 }
