@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { IRecipe } from '../data-model';
+import { IRecipe, IMedicine } from '../data-model';
 import { RecipeService} from '../recipe.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class RecipeFormComponent implements OnInit {
 
   public deliveryMethods = ['pickup', 'delivery'];
   public recipeForm: FormGroup;
+  public medicines: IMedicine[];
+  public selectedMedicines: any[] = [];
 
   constructor(private fb: FormBuilder, private recipeService: RecipeService) {
 
@@ -22,8 +24,23 @@ export class RecipeFormComponent implements OnInit {
       bsnNumber: '',
       prescriptionDate: '',
       endDate: '',
-      deliveryMethod: 'pickup'
+      deliveryMethod: 'pickup',
+      medicineForm: this.fb.array([this.initMedicineForm()])
     });
+  }
+
+  public initMedicineForm() {
+    return this.fb.group({
+      medicine: '',
+      usage: ''
+    });
+
+  }
+
+  public addMedicine() {
+    debugger
+    //this.selectedMedicines = this.recipeForm.get('medicineForm') as FormArray;
+    this.selectedMedicines.push(this.initMedicineForm());
   }
 
   public saveRecipe() {
@@ -40,8 +57,17 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
+  public getMedicines() {
+    this.recipeService.getMedicines().subscribe(response => {
+      console.log("Got a response!");
+      console.log(response);
+      this.medicines = <IMedicine[]>response;
+    });
+  }
+
   ngOnInit() {
     this.createForm();
+    this.getMedicines();
   }
 
 }

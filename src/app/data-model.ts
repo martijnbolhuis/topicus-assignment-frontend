@@ -1,7 +1,7 @@
 export interface IMedicine {
   id: number;
   name: string;
-  children: IMedicineForm[];
+  //children: IMedicineForm[];
 
 }
 

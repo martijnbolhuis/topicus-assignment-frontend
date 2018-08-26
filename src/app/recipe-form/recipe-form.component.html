@@ -2,7 +2,7 @@
   <h1>Recept</h1>
   <form [formGroup]="recipeForm">
     <div class="form-group">
-     <label>BSN Number:</label> 
+     <label>BSN Number:</label>
       <input class="form-control"  formControlName="bsnNumber" type="text" name="bsn_number"><br>
     </div>
     <div class="form-group">
@@ -10,15 +10,33 @@
       <input formControlName="prescriptionDate" class="form-control" type="date" name="prescription_date"><br>
     </div>
     <div class="form-group">
-      <label>End date:</label> 
+      <label>End date:</label>
       <input formControlName="endDate" type="date" class="form-control" name="end_date"><br>
     </div>
     <div class="form-group">
-      <label>method:</label> 
+      <label>method:</label>
       <select class="form-control" formControlName="deliveryMethod">
         <option *ngFor="let deliveryMethod of deliveryMethods" [value]="deliveryMethod">{{deliveryMethod}}</option>
       </select>
     </div>
+
+    <div formArrayName="medicineForm"
+      *ngFor="let medicine of recipeForm.get('medicineForm').controls; let i = index">
+      <div [formGroupName]="i">
+        <div class="form-group">
+          <label>Medicine</label>
+          <select class="form-control" formControlName="medicine">
+            <option *ngFor="let medicine of medicines" [value]="medicine.id">{{medicine.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Usage</label>
+          <textarea formControlName="usage" class="form-control" name="usage"></textarea><br>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="addMedicine()">Add</button>
     <button type="submit" class="btn btn-primary" (click)="saveRecipe()">Save</button>
   </form>
 
