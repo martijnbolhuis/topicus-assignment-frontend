@@ -18,11 +18,11 @@ export interface IMedicineForm {
   content_unit: string;
 }
 
-export interface IRecipe {
-  bsn_number: string,
-  prescription_date: string,
-  end_date: string,
-  delivery_method: string
+export class IRecipe {
+  bsn_number: string;
+  prescription_date: string;
+  end_date: string;
+  delivery_method: string;
 }
 
 //export enum DeliveryMethods {

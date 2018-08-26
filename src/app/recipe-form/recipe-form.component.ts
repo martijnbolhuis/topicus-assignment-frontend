@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { DeliveryMethods, IRecipe } from '../data-model';
+import { IRecipe } from '../data-model';
 import { RecipeService} from '../recipe.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { RecipeService} from '../recipe.service';
 })
 export class RecipeFormComponent implements OnInit {
 
-  public deliveryMethods: DeliveryMethods;
+  public deliveryMethods = ['pickup', 'delivery'];
   public recipeForm: FormGroup;
 
   constructor(private fb: FormBuilder, private recipeService: RecipeService) {
@@ -34,13 +34,12 @@ export class RecipeFormComponent implements OnInit {
       delivery_method: this.recipeForm.get('deliveryMethod').value
     }
 
-    console.log(recipe);
-
-    //this.recipeService.saveRecipe();
+    this.recipeService.saveRecipe(recipe).subscribe(response => {
+      console.log(response);
+    });
   }
 
   ngOnInit() {
-    this.deliveryMethods = ['pickup', 'delivery']
     this.createForm();
   }
 
