@@ -38,9 +38,8 @@ export class RecipeFormComponent implements OnInit {
   }
 
   public addMedicine() {
-    debugger
-    //this.selectedMedicines = this.recipeForm.get('medicineForm') as FormArray;
-    this.selectedMedicines.push(this.initMedicineForm());
+    //this.selectedMedicines = this.recipeForm.get('medicineForm') //as FormArray;
+    (<FormArray>this.recipeForm.get('medicineForm')).push(this.initMedicineForm());
   }
 
   public saveRecipe() {
