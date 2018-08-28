@@ -78,6 +78,10 @@ export class RecipeFormComponent implements OnInit {
     });
   }
 
+  public deleteMedicine(i: number) {
+    (<FormArray>this.recipeForm.get('medicineForm')).removeAt(i);
+  }
+
   ngOnInit() {
     this.createForm();
     this.getMedicines();
