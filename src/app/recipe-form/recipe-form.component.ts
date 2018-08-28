@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { IRecipe, IMedicine } from '../data-model';
+import { IRecipe, IMedicine, IRecipeMedicine } from '../data-model';
 import { RecipeService} from '../recipe.service';
 
 @Component({
@@ -50,26 +50,31 @@ export class RecipeFormComponent implements OnInit {
       end_date: this.recipeForm.get('endDate').value,
       delivery_method: this.recipeForm.get('deliveryMethod').value
     }
-    console.log(recipe);
-    this.recipeService.saveRecipe(recipe).subscribe(response => {
-      console.log("Got a response!");
-      console.log(response);
+
+    recipe.medicines = (<FormArray>this.recipeForm.get('medicineForm')).controls.map(fc =>{
+      return <IRecipeMedicine>{
+        medicine_form_id: fc.value.medicine,
+        usage: fc.value.usage
+      }
     });
+
+    this.recipeService.saveRecipe(recipe).subscribe(response => {});
   }
 
   public getMedicines() {
     this.recipeService.getMedicines().subscribe(response => {
-      console.log("Got a response!");
-      console.log(response);
       this.medicines = <IMedicine[]>response;
 
       let medicineForms = this.medicines.map(medicine => {
+        medicine.children.medicineforms.forEach(medicineForm => {
+          medicineForm.label = medicine.name + ' ' + medicineForm.name;
+        });
+
         return medicine.children.medicineforms;
-      })
+      });
 
       //flatten
-      this.medicineForms = [].concat(medicineForms);
-      debugger;
+      this.medicineForms = [].concat(...medicineForms);
     });
   }
 
