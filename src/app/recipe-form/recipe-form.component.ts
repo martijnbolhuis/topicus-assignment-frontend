@@ -14,6 +14,7 @@ export class RecipeFormComponent implements OnInit {
   public recipeForm: FormGroup;
   public medicines: IMedicine[];
   public selectedMedicines: any[] = [];
+  public medicineForms: any[] = [];
 
   constructor(private fb: FormBuilder, private recipeService: RecipeService) {
 
@@ -61,6 +62,14 @@ export class RecipeFormComponent implements OnInit {
       console.log("Got a response!");
       console.log(response);
       this.medicines = <IMedicine[]>response;
+
+      let medicineForms = this.medicines.map(medicine => {
+        return medicine.children.medicineforms;
+      })
+
+      //flatten
+      this.medicineForms = [].concat(medicineForms);
+      debugger;
     });
   }
 

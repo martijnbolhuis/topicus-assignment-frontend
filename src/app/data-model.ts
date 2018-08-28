@@ -1,8 +1,12 @@
 export interface IMedicine {
   id: number;
   name: string;
-  //children: IMedicineForm[];
+  children: IMedicineChildren;
 
+}
+
+export interface IMedicineChildren {
+  medicineforms: IMedicineForm[];
 }
 
 export interface IMedicineForm {
