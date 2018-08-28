@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { IRecipe, IMedicine, IRecipeMedicine } from '../data-model';
 import { RecipeService} from '../recipe.service';
 
@@ -23,10 +23,10 @@ export class RecipeFormComponent implements OnInit {
 
   public createForm() {
     this.recipeForm = this.fb.group({
-      bsnNumber: '',
-      prescriptionDate: '',
-      endDate: '',
-      deliveryMethod: 'pickup',
+      bsnNumber: ['', Validators.required],
+      prescriptionDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      deliveryMethod: ['pickup', Validators.required],
       medicineForm: this.fb.array([this.initMedicineForm()])
     });
   }

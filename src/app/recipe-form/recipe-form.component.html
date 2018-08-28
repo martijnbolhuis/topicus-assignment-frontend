@@ -40,7 +40,7 @@
     </div>
 
     <button (click)="addMedicine()">Add</button>
-    <button type="submit" class="btn btn-primary" (click)="saveRecipe()">Save</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid" (click)="saveRecipe()">Save</button>
   </form>
 
 </div>
