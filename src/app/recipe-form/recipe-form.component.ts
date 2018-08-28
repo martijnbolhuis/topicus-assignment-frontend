@@ -15,6 +15,7 @@ export class RecipeFormComponent implements OnInit {
   public medicines: IMedicine[];
   public selectedMedicines: any[] = [];
   public medicineForms: any[] = [];
+  public showForm = true;
 
   constructor(private fb: FormBuilder, private recipeService: RecipeService) {
 
@@ -58,7 +59,12 @@ export class RecipeFormComponent implements OnInit {
       }
     });
 
-    this.recipeService.saveRecipe(recipe).subscribe(response => {});
+    this.recipeService.saveRecipe(recipe).subscribe(response => {
+      if (response.status === 200){
+        this.showForm = false;
+      }
+    });
+
   }
 
   public getMedicines() {

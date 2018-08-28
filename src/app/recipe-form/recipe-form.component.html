@@ -1,5 +1,8 @@
 <div class="container">
-  <form [formGroup]="recipeForm">
+  <div class="alert alert-success" *ngIf="!showForm">
+    Your recipe has been sent.
+  </div>
+  <form [formGroup]="recipeForm" *ngIf="showForm">
     <div class="form-group">
      <label>BSN Number:</label>
       <input class="form-control"  formControlName="bsnNumber" type="text" name="bsn_number"><br>
